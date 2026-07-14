@@ -1,13 +1,13 @@
 datasource db {
   provider = "postgresql"
-  
 }
 
 generator client {
-  provider = "prisma-client-js"
+  provider = "prisma-client"        
+  output   = "../src/generated/prisma"
+  moduleFormat = "cjs"  
+
 }
-
-
 model User {
   id          String   @id @default(uuid())
   fullName    String
