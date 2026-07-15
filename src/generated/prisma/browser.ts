@@ -23,6 +23,11 @@ export * from './enums.js';
  */
 export type User = Prisma.UserModel
 /**
+ * Model CarOwner
+ * 
+ */
+export type CarOwner = Prisma.CarOwnerModel
+/**
  * Model Driver
  * 
  */
@@ -47,6 +52,11 @@ export type Payment = Prisma.PaymentModel
  * 
  */
 export type Wallet = Prisma.WalletModel
+/**
+ * Model OwnerWallet
+ * 
+ */
+export type OwnerWallet = Prisma.OwnerWalletModel
 /**
  * Model Transaction
  * 

@@ -52,11 +52,13 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   User: 'User',
+  CarOwner: 'CarOwner',
   Driver: 'Driver',
   Vehicle: 'Vehicle',
   Ride: 'Ride',
   Payment: 'Payment',
   Wallet: 'Wallet',
+  OwnerWallet: 'OwnerWallet',
   Transaction: 'Transaction'
 } as const
 
@@ -87,11 +89,24 @@ export const UserScalarFieldEnum = {
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
+export const CarOwnerScalarFieldEnum = {
+  id: 'id',
+  fullName: 'fullName',
+  email: 'email',
+  phoneNumber: 'phoneNumber',
+  createdAt: 'createdAt'
+} as const
+
+export type CarOwnerScalarFieldEnum = (typeof CarOwnerScalarFieldEnum)[keyof typeof CarOwnerScalarFieldEnum]
+
+
 export const DriverScalarFieldEnum = {
   id: 'id',
   fullName: 'fullName',
   phoneNumber: 'phoneNumber',
   licenseIndex: 'licenseIndex',
+  companyName: 'companyName',
+  idCardUrl: 'idCardUrl',
   status: 'status',
   createdAt: 'createdAt'
 } as const
@@ -104,6 +119,9 @@ export const VehicleScalarFieldEnum = {
   carType: 'carType',
   plateNumber: 'plateNumber',
   color: 'color',
+  basePrice: 'basePrice',
+  isAvailable: 'isAvailable',
+  ownerId: 'ownerId',
   driverId: 'driverId'
 } as const
 
@@ -115,6 +133,7 @@ export const RideScalarFieldEnum = {
   pickupLocation: 'pickupLocation',
   dropoffLocation: 'dropoffLocation',
   farePrice: 'farePrice',
+  negotiatedPrice: 'negotiatedPrice',
   status: 'status',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
@@ -148,6 +167,16 @@ export const WalletScalarFieldEnum = {
 export type WalletScalarFieldEnum = (typeof WalletScalarFieldEnum)[keyof typeof WalletScalarFieldEnum]
 
 
+export const OwnerWalletScalarFieldEnum = {
+  id: 'id',
+  balance: 'balance',
+  updatedAt: 'updatedAt',
+  ownerId: 'ownerId'
+} as const
+
+export type OwnerWalletScalarFieldEnum = (typeof OwnerWalletScalarFieldEnum)[keyof typeof OwnerWalletScalarFieldEnum]
+
+
 export const TransactionScalarFieldEnum = {
   id: 'id',
   amount: 'amount',
@@ -156,6 +185,7 @@ export const TransactionScalarFieldEnum = {
   description: 'description',
   createdAt: 'createdAt',
   walletId: 'walletId',
+  ownerWalletId: 'ownerWalletId',
   rideId: 'rideId'
 } as const
 

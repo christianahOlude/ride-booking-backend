@@ -9,10 +9,12 @@
  * 🟢 You can import this file directly.
  */
 export type * from './models/User.js'
+export type * from './models/CarOwner.js'
 export type * from './models/Driver.js'
 export type * from './models/Vehicle.js'
 export type * from './models/Ride.js'
 export type * from './models/Payment.js'
 export type * from './models/Wallet.js'
+export type * from './models/OwnerWallet.js'
 export type * from './models/Transaction.js'
 export type * from './commonInputTypes.js'

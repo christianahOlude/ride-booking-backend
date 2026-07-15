@@ -28,10 +28,12 @@ export type AggregateRide = {
 
 export type RideAvgAggregateOutputType = {
   farePrice: runtime.Decimal | null
+  negotiatedPrice: runtime.Decimal | null
 }
 
 export type RideSumAggregateOutputType = {
   farePrice: runtime.Decimal | null
+  negotiatedPrice: runtime.Decimal | null
 }
 
 export type RideMinAggregateOutputType = {
@@ -39,6 +41,7 @@ export type RideMinAggregateOutputType = {
   pickupLocation: string | null
   dropoffLocation: string | null
   farePrice: runtime.Decimal | null
+  negotiatedPrice: runtime.Decimal | null
   status: $Enums.RideStatus | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -51,6 +54,7 @@ export type RideMaxAggregateOutputType = {
   pickupLocation: string | null
   dropoffLocation: string | null
   farePrice: runtime.Decimal | null
+  negotiatedPrice: runtime.Decimal | null
   status: $Enums.RideStatus | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -63,6 +67,7 @@ export type RideCountAggregateOutputType = {
   pickupLocation: number
   dropoffLocation: number
   farePrice: number
+  negotiatedPrice: number
   status: number
   createdAt: number
   updatedAt: number
@@ -74,10 +79,12 @@ export type RideCountAggregateOutputType = {
 
 export type RideAvgAggregateInputType = {
   farePrice?: true
+  negotiatedPrice?: true
 }
 
 export type RideSumAggregateInputType = {
   farePrice?: true
+  negotiatedPrice?: true
 }
 
 export type RideMinAggregateInputType = {
@@ -85,6 +92,7 @@ export type RideMinAggregateInputType = {
   pickupLocation?: true
   dropoffLocation?: true
   farePrice?: true
+  negotiatedPrice?: true
   status?: true
   createdAt?: true
   updatedAt?: true
@@ -97,6 +105,7 @@ export type RideMaxAggregateInputType = {
   pickupLocation?: true
   dropoffLocation?: true
   farePrice?: true
+  negotiatedPrice?: true
   status?: true
   createdAt?: true
   updatedAt?: true
@@ -109,6 +118,7 @@ export type RideCountAggregateInputType = {
   pickupLocation?: true
   dropoffLocation?: true
   farePrice?: true
+  negotiatedPrice?: true
   status?: true
   createdAt?: true
   updatedAt?: true
@@ -208,6 +218,7 @@ export type RideGroupByOutputType = {
   pickupLocation: string
   dropoffLocation: string
   farePrice: runtime.Decimal
+  negotiatedPrice: runtime.Decimal | null
   status: $Enums.RideStatus
   createdAt: Date
   updatedAt: Date
@@ -243,6 +254,7 @@ export type RideWhereInput = {
   pickupLocation?: Prisma.StringFilter<"Ride"> | string
   dropoffLocation?: Prisma.StringFilter<"Ride"> | string
   farePrice?: Prisma.DecimalFilter<"Ride"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  negotiatedPrice?: Prisma.DecimalNullableFilter<"Ride"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   status?: Prisma.EnumRideStatusFilter<"Ride"> | $Enums.RideStatus
   createdAt?: Prisma.DateTimeFilter<"Ride"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Ride"> | Date | string
@@ -259,6 +271,7 @@ export type RideOrderByWithRelationInput = {
   pickupLocation?: Prisma.SortOrder
   dropoffLocation?: Prisma.SortOrder
   farePrice?: Prisma.SortOrder
+  negotiatedPrice?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -278,6 +291,7 @@ export type RideWhereUniqueInput = Prisma.AtLeast<{
   pickupLocation?: Prisma.StringFilter<"Ride"> | string
   dropoffLocation?: Prisma.StringFilter<"Ride"> | string
   farePrice?: Prisma.DecimalFilter<"Ride"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  negotiatedPrice?: Prisma.DecimalNullableFilter<"Ride"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   status?: Prisma.EnumRideStatusFilter<"Ride"> | $Enums.RideStatus
   createdAt?: Prisma.DateTimeFilter<"Ride"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Ride"> | Date | string
@@ -294,6 +308,7 @@ export type RideOrderByWithAggregationInput = {
   pickupLocation?: Prisma.SortOrder
   dropoffLocation?: Prisma.SortOrder
   farePrice?: Prisma.SortOrder
+  negotiatedPrice?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -314,6 +329,7 @@ export type RideScalarWhereWithAggregatesInput = {
   pickupLocation?: Prisma.StringWithAggregatesFilter<"Ride"> | string
   dropoffLocation?: Prisma.StringWithAggregatesFilter<"Ride"> | string
   farePrice?: Prisma.DecimalWithAggregatesFilter<"Ride"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  negotiatedPrice?: Prisma.DecimalNullableWithAggregatesFilter<"Ride"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   status?: Prisma.EnumRideStatusWithAggregatesFilter<"Ride"> | $Enums.RideStatus
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Ride"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Ride"> | Date | string
@@ -326,6 +342,7 @@ export type RideCreateInput = {
   pickupLocation: string
   dropoffLocation: string
   farePrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  negotiatedPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   status?: $Enums.RideStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -340,6 +357,7 @@ export type RideUncheckedCreateInput = {
   pickupLocation: string
   dropoffLocation: string
   farePrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  negotiatedPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   status?: $Enums.RideStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -354,6 +372,7 @@ export type RideUpdateInput = {
   pickupLocation?: Prisma.StringFieldUpdateOperationsInput | string
   dropoffLocation?: Prisma.StringFieldUpdateOperationsInput | string
   farePrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  negotiatedPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   status?: Prisma.EnumRideStatusFieldUpdateOperationsInput | $Enums.RideStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -368,6 +387,7 @@ export type RideUncheckedUpdateInput = {
   pickupLocation?: Prisma.StringFieldUpdateOperationsInput | string
   dropoffLocation?: Prisma.StringFieldUpdateOperationsInput | string
   farePrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  negotiatedPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   status?: Prisma.EnumRideStatusFieldUpdateOperationsInput | $Enums.RideStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -382,6 +402,7 @@ export type RideCreateManyInput = {
   pickupLocation: string
   dropoffLocation: string
   farePrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  negotiatedPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   status?: $Enums.RideStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -394,6 +415,7 @@ export type RideUpdateManyMutationInput = {
   pickupLocation?: Prisma.StringFieldUpdateOperationsInput | string
   dropoffLocation?: Prisma.StringFieldUpdateOperationsInput | string
   farePrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  negotiatedPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   status?: Prisma.EnumRideStatusFieldUpdateOperationsInput | $Enums.RideStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -404,6 +426,7 @@ export type RideUncheckedUpdateManyInput = {
   pickupLocation?: Prisma.StringFieldUpdateOperationsInput | string
   dropoffLocation?: Prisma.StringFieldUpdateOperationsInput | string
   farePrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  negotiatedPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   status?: Prisma.EnumRideStatusFieldUpdateOperationsInput | $Enums.RideStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -426,6 +449,7 @@ export type RideCountOrderByAggregateInput = {
   pickupLocation?: Prisma.SortOrder
   dropoffLocation?: Prisma.SortOrder
   farePrice?: Prisma.SortOrder
+  negotiatedPrice?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -435,6 +459,7 @@ export type RideCountOrderByAggregateInput = {
 
 export type RideAvgOrderByAggregateInput = {
   farePrice?: Prisma.SortOrder
+  negotiatedPrice?: Prisma.SortOrder
 }
 
 export type RideMaxOrderByAggregateInput = {
@@ -442,6 +467,7 @@ export type RideMaxOrderByAggregateInput = {
   pickupLocation?: Prisma.SortOrder
   dropoffLocation?: Prisma.SortOrder
   farePrice?: Prisma.SortOrder
+  negotiatedPrice?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -454,6 +480,7 @@ export type RideMinOrderByAggregateInput = {
   pickupLocation?: Prisma.SortOrder
   dropoffLocation?: Prisma.SortOrder
   farePrice?: Prisma.SortOrder
+  negotiatedPrice?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -463,6 +490,7 @@ export type RideMinOrderByAggregateInput = {
 
 export type RideSumOrderByAggregateInput = {
   farePrice?: Prisma.SortOrder
+  negotiatedPrice?: Prisma.SortOrder
 }
 
 export type RideScalarRelationFilter = {
@@ -559,8 +587,8 @@ export type RideUncheckedUpdateManyWithoutDriverNestedInput = {
   deleteMany?: Prisma.RideScalarWhereInput | Prisma.RideScalarWhereInput[]
 }
 
-export type DecimalFieldUpdateOperationsInput = {
-  set?: runtime.Decimal | runtime.DecimalJsLike | number | string
+export type NullableDecimalFieldUpdateOperationsInput = {
+  set?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
   decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
   multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -606,6 +634,7 @@ export type RideCreateWithoutUserInput = {
   pickupLocation: string
   dropoffLocation: string
   farePrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  negotiatedPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   status?: $Enums.RideStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -619,6 +648,7 @@ export type RideUncheckedCreateWithoutUserInput = {
   pickupLocation: string
   dropoffLocation: string
   farePrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  negotiatedPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   status?: $Enums.RideStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -661,6 +691,7 @@ export type RideScalarWhereInput = {
   pickupLocation?: Prisma.StringFilter<"Ride"> | string
   dropoffLocation?: Prisma.StringFilter<"Ride"> | string
   farePrice?: Prisma.DecimalFilter<"Ride"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  negotiatedPrice?: Prisma.DecimalNullableFilter<"Ride"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   status?: Prisma.EnumRideStatusFilter<"Ride"> | $Enums.RideStatus
   createdAt?: Prisma.DateTimeFilter<"Ride"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Ride"> | Date | string
@@ -673,6 +704,7 @@ export type RideCreateWithoutDriverInput = {
   pickupLocation: string
   dropoffLocation: string
   farePrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  negotiatedPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   status?: $Enums.RideStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -686,6 +718,7 @@ export type RideUncheckedCreateWithoutDriverInput = {
   pickupLocation: string
   dropoffLocation: string
   farePrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  negotiatedPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   status?: $Enums.RideStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -725,6 +758,7 @@ export type RideCreateWithoutPaymentInput = {
   pickupLocation: string
   dropoffLocation: string
   farePrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  negotiatedPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   status?: $Enums.RideStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -738,6 +772,7 @@ export type RideUncheckedCreateWithoutPaymentInput = {
   pickupLocation: string
   dropoffLocation: string
   farePrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  negotiatedPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   status?: $Enums.RideStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -767,6 +802,7 @@ export type RideUpdateWithoutPaymentInput = {
   pickupLocation?: Prisma.StringFieldUpdateOperationsInput | string
   dropoffLocation?: Prisma.StringFieldUpdateOperationsInput | string
   farePrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  negotiatedPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   status?: Prisma.EnumRideStatusFieldUpdateOperationsInput | $Enums.RideStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -780,6 +816,7 @@ export type RideUncheckedUpdateWithoutPaymentInput = {
   pickupLocation?: Prisma.StringFieldUpdateOperationsInput | string
   dropoffLocation?: Prisma.StringFieldUpdateOperationsInput | string
   farePrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  negotiatedPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   status?: Prisma.EnumRideStatusFieldUpdateOperationsInput | $Enums.RideStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -793,6 +830,7 @@ export type RideCreateWithoutTransactionsInput = {
   pickupLocation: string
   dropoffLocation: string
   farePrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  negotiatedPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   status?: $Enums.RideStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -806,6 +844,7 @@ export type RideUncheckedCreateWithoutTransactionsInput = {
   pickupLocation: string
   dropoffLocation: string
   farePrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  negotiatedPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   status?: $Enums.RideStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -835,6 +874,7 @@ export type RideUpdateWithoutTransactionsInput = {
   pickupLocation?: Prisma.StringFieldUpdateOperationsInput | string
   dropoffLocation?: Prisma.StringFieldUpdateOperationsInput | string
   farePrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  negotiatedPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   status?: Prisma.EnumRideStatusFieldUpdateOperationsInput | $Enums.RideStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -848,6 +888,7 @@ export type RideUncheckedUpdateWithoutTransactionsInput = {
   pickupLocation?: Prisma.StringFieldUpdateOperationsInput | string
   dropoffLocation?: Prisma.StringFieldUpdateOperationsInput | string
   farePrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  negotiatedPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   status?: Prisma.EnumRideStatusFieldUpdateOperationsInput | $Enums.RideStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -861,6 +902,7 @@ export type RideCreateManyUserInput = {
   pickupLocation: string
   dropoffLocation: string
   farePrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  negotiatedPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   status?: $Enums.RideStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -872,6 +914,7 @@ export type RideUpdateWithoutUserInput = {
   pickupLocation?: Prisma.StringFieldUpdateOperationsInput | string
   dropoffLocation?: Prisma.StringFieldUpdateOperationsInput | string
   farePrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  negotiatedPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   status?: Prisma.EnumRideStatusFieldUpdateOperationsInput | $Enums.RideStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -885,6 +928,7 @@ export type RideUncheckedUpdateWithoutUserInput = {
   pickupLocation?: Prisma.StringFieldUpdateOperationsInput | string
   dropoffLocation?: Prisma.StringFieldUpdateOperationsInput | string
   farePrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  negotiatedPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   status?: Prisma.EnumRideStatusFieldUpdateOperationsInput | $Enums.RideStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -898,6 +942,7 @@ export type RideUncheckedUpdateManyWithoutUserInput = {
   pickupLocation?: Prisma.StringFieldUpdateOperationsInput | string
   dropoffLocation?: Prisma.StringFieldUpdateOperationsInput | string
   farePrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  negotiatedPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   status?: Prisma.EnumRideStatusFieldUpdateOperationsInput | $Enums.RideStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -909,6 +954,7 @@ export type RideCreateManyDriverInput = {
   pickupLocation: string
   dropoffLocation: string
   farePrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  negotiatedPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   status?: $Enums.RideStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -920,6 +966,7 @@ export type RideUpdateWithoutDriverInput = {
   pickupLocation?: Prisma.StringFieldUpdateOperationsInput | string
   dropoffLocation?: Prisma.StringFieldUpdateOperationsInput | string
   farePrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  negotiatedPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   status?: Prisma.EnumRideStatusFieldUpdateOperationsInput | $Enums.RideStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -933,6 +980,7 @@ export type RideUncheckedUpdateWithoutDriverInput = {
   pickupLocation?: Prisma.StringFieldUpdateOperationsInput | string
   dropoffLocation?: Prisma.StringFieldUpdateOperationsInput | string
   farePrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  negotiatedPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   status?: Prisma.EnumRideStatusFieldUpdateOperationsInput | $Enums.RideStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -946,6 +994,7 @@ export type RideUncheckedUpdateManyWithoutDriverInput = {
   pickupLocation?: Prisma.StringFieldUpdateOperationsInput | string
   dropoffLocation?: Prisma.StringFieldUpdateOperationsInput | string
   farePrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  negotiatedPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   status?: Prisma.EnumRideStatusFieldUpdateOperationsInput | $Enums.RideStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -988,6 +1037,7 @@ export type RideSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   pickupLocation?: boolean
   dropoffLocation?: boolean
   farePrice?: boolean
+  negotiatedPrice?: boolean
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1005,6 +1055,7 @@ export type RideSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   pickupLocation?: boolean
   dropoffLocation?: boolean
   farePrice?: boolean
+  negotiatedPrice?: boolean
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1019,6 +1070,7 @@ export type RideSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   pickupLocation?: boolean
   dropoffLocation?: boolean
   farePrice?: boolean
+  negotiatedPrice?: boolean
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1033,6 +1085,7 @@ export type RideSelectScalar = {
   pickupLocation?: boolean
   dropoffLocation?: boolean
   farePrice?: boolean
+  negotiatedPrice?: boolean
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1040,7 +1093,7 @@ export type RideSelectScalar = {
   driverId?: boolean
 }
 
-export type RideOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "pickupLocation" | "dropoffLocation" | "farePrice" | "status" | "createdAt" | "updatedAt" | "userId" | "driverId", ExtArgs["result"]["ride"]>
+export type RideOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "pickupLocation" | "dropoffLocation" | "farePrice" | "negotiatedPrice" | "status" | "createdAt" | "updatedAt" | "userId" | "driverId", ExtArgs["result"]["ride"]>
 export type RideInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   driver?: boolean | Prisma.Ride$driverArgs<ExtArgs>
@@ -1070,6 +1123,7 @@ export type $RidePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     pickupLocation: string
     dropoffLocation: string
     farePrice: runtime.Decimal
+    negotiatedPrice: runtime.Decimal | null
     status: $Enums.RideStatus
     createdAt: Date
     updatedAt: Date
@@ -1506,6 +1560,7 @@ export interface RideFieldRefs {
   readonly pickupLocation: Prisma.FieldRef<"Ride", 'String'>
   readonly dropoffLocation: Prisma.FieldRef<"Ride", 'String'>
   readonly farePrice: Prisma.FieldRef<"Ride", 'Decimal'>
+  readonly negotiatedPrice: Prisma.FieldRef<"Ride", 'Decimal'>
   readonly status: Prisma.FieldRef<"Ride", 'RideStatus'>
   readonly createdAt: Prisma.FieldRef<"Ride", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Ride", 'DateTime'>

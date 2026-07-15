@@ -1,13 +1,14 @@
 datasource db {
   provider = "postgresql"
+  // url      = env("DATABASE_URL")
 }
 
 generator client {
-  provider = "prisma-client"        
-  output   = "../src/generated/prisma"
+  provider     = "prisma-client"        
+  output       = "../src/generated/prisma"
   moduleFormat = "cjs"  
-
 }
+
 model User {
   id          String   @id @default(uuid())
   fullName    String
@@ -17,54 +18,89 @@ model User {
   rides       Ride[]   
 }
 
+model CarOwner {
+  id          String       @id @default(uuid())
+  fullName    String
+  email       String       @unique
+  phoneNumber String       @unique
+  createdAt   DateTime     @default(now())
+  vehicles    Vehicle[]    // A car owner can upload as many vehicles as they have
+  wallet      OwnerWallet? // Wallet for receiving rental payouts (minus driver's commission)
+}
+
 model Driver {
   id           String       @id @default(uuid())
   fullName     String
   phoneNumber  String       @unique
   licenseIndex String       @unique
+  companyName  String       // Drivers must provide their company name
+  idCardUrl    String       // URL of their uploaded ID card (which has the company name)
   status       DriverStatus @default(AVAILABLE) 
   createdAt    DateTime     @default(now())
-  vehicle      Vehicle?     
+  vehicle      Vehicle?     // A driver is assigned to one car
   rides        Ride[]       
-  wallet       Wallet?
+  wallet       Wallet?      // Wallet to receive commissions
 }
 
 model Vehicle {
-  id           String   @id @default(uuid())
-  carType      String   
-  plateNumber  String   @unique 
+  id           String    @id @default(uuid())
+  carType      String    // e.g., Sedan, SUV, Luxury Bus
+  plateNumber  String    @unique 
   color        String
-  driverId     String?  @unique 
-  driver       Driver?  @relation(fields: [driverId], references: [id])
+  basePrice    Decimal   // The base price set by the car owner
+  isAvailable  Boolean   @default(true) // Car owner toggles availability
+  
+  ownerId      String
+  owner        CarOwner  @relation(fields: [ownerId], references: [id])
+  
+  driverId     String?   @unique 
+  driver       Driver?   @relation(fields: [driverId], references: [id])
 }
 
 model Ride {
   id              String        @id @default(uuid())
   pickupLocation  String     
   dropoffLocation String    
-  farePrice       Decimal    
+  farePrice       Decimal       // The final agreed/original fare price
+  negotiatedPrice Decimal?      // Holds the custom price if the client negotiates
   status          RideStatus    @default(PENDING) 
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @updatedAt
+  
   userId          String
   user            User          @relation(fields: [userId], references: [id])
+  
   driverId        String?
   driver          Driver?       @relation(fields: [driverId], references: [id])
+  
   payment         Payment?   
   transactions    Transaction[]
 }
 
 model Payment {
-  id            String        @id @default(uuid())
-  amount        Decimal
-  paymentMethod PaymentMethod @default(CASH) 
-  status        PaymentStatus @default(PENDING) 
-  transactionRef String?      @unique 
-  createdAt     DateTime      @default(now())
-  rideId        String        @unique
-  ride          Ride          @relation(fields: [rideId], references: [id])
+  id             String        @id @default(uuid())
+  amount         Decimal       // 100% of the trip cost paid by passenger
+  paymentMethod  PaymentMethod @default(TRANSFER) // Defaulted to bank/app transfer
+  status         PaymentStatus @default(PENDING) 
+  transactionRef String?       @unique // The unique bank transfer reference / session ID
+  createdAt      DateTime      @default(now())
+  rideId         String        @unique
+  ride           Ride          @relation(fields: [rideId], references: [id])
 }
 
+enum PaymentMethod {
+  TRANSFER
+  CARD
+  WALLET
+}
+
+enum TxPurpose {
+  TRIP_EARNINGS          // For the Car Owner's rental payout
+  COMMISSION_EARNED      // For the Driver's commission
+  WITHDRAWAL             // When an owner or driver transfers money out to their bank account
+}
+
+// Wallet for Drivers to receive commissions
 model Wallet {
   id           String        @id @default(uuid())
   balance      Decimal       @default(0.00) 
@@ -74,17 +110,33 @@ model Wallet {
   transactions Transaction[] 
 }
 
+// Wallet for Car Owners to receive rental fees (base price minus driver commission)
+model OwnerWallet {
+  id           String        @id @default(uuid())
+  balance      Decimal       @default(0.00)
+  updatedAt    DateTime      @updatedAt
+  ownerId      String        @unique
+  owner        CarOwner      @relation(fields: [ownerId], references: [id])
+  transactions Transaction[]
+}
+
 model Transaction {
-  id              String          @id @default(uuid())
-  amount          Decimal         
-  type            TransactionType 
-  purpose         TxPurpose       
-  description     String?         
-  createdAt       DateTime        @default(now())
-  walletId        String
-  wallet          Wallet          @relation(fields: [walletId], references: [id])
-  rideId          String?         
-  ride            Ride?           @relation(fields: [rideId], references: [id])
+  id            String          @id @default(uuid())
+  amount        Decimal         
+  type          TransactionType 
+  purpose       TxPurpose       
+  description   String?         
+  createdAt     DateTime        @default(now())
+  
+  // A transaction can belong either to a driver's wallet OR an owner's wallet
+  walletId      String?
+  wallet        Wallet?         @relation(fields: [walletId], references: [id])
+  
+  ownerWalletId String?
+  ownerWallet   OwnerWallet?    @relation(fields: [ownerWalletId], references: [id])
+  
+  rideId        String?         
+  ride          Ride?           @relation(fields: [rideId], references: [id])
 }
 
 enum DriverStatus {
@@ -101,11 +153,6 @@ enum RideStatus {
   CANCELLED
 }
 
-enum PaymentMethod {
-  CASH
-  WALLET
-  CARD
-}
 
 enum PaymentStatus {
   PENDING
@@ -118,9 +165,3 @@ enum TransactionType {
   DEBIT
 }
 
-enum TxPurpose {
-  TRIP_EARNINGS          
-  COMMISSION_DEDUCTION   
-  WITHDRAWAL             
-  CASH_COLLECTED         
-}

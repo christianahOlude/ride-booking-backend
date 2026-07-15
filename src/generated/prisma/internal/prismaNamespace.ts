@@ -385,11 +385,13 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 export const ModelName = {
   User: 'User',
+  CarOwner: 'CarOwner',
   Driver: 'Driver',
   Vehicle: 'Vehicle',
   Ride: 'Ride',
   Payment: 'Payment',
   Wallet: 'Wallet',
+  OwnerWallet: 'OwnerWallet',
   Transaction: 'Transaction'
 } as const
 
@@ -406,7 +408,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "driver" | "vehicle" | "ride" | "payment" | "wallet" | "transaction"
+    modelProps: "user" | "carOwner" | "driver" | "vehicle" | "ride" | "payment" | "wallet" | "ownerWallet" | "transaction"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -481,6 +483,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.UserCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.UserCountAggregateOutputType> | number
+        }
+      }
+    }
+    CarOwner: {
+      payload: Prisma.$CarOwnerPayload<ExtArgs>
+      fields: Prisma.CarOwnerFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CarOwnerFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarOwnerPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CarOwnerFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarOwnerPayload>
+        }
+        findFirst: {
+          args: Prisma.CarOwnerFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarOwnerPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CarOwnerFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarOwnerPayload>
+        }
+        findMany: {
+          args: Prisma.CarOwnerFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarOwnerPayload>[]
+        }
+        create: {
+          args: Prisma.CarOwnerCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarOwnerPayload>
+        }
+        createMany: {
+          args: Prisma.CarOwnerCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CarOwnerCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarOwnerPayload>[]
+        }
+        delete: {
+          args: Prisma.CarOwnerDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarOwnerPayload>
+        }
+        update: {
+          args: Prisma.CarOwnerUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarOwnerPayload>
+        }
+        deleteMany: {
+          args: Prisma.CarOwnerDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CarOwnerUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CarOwnerUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarOwnerPayload>[]
+        }
+        upsert: {
+          args: Prisma.CarOwnerUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarOwnerPayload>
+        }
+        aggregate: {
+          args: Prisma.CarOwnerAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCarOwner>
+        }
+        groupBy: {
+          args: Prisma.CarOwnerGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CarOwnerGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CarOwnerCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CarOwnerCountAggregateOutputType> | number
         }
       }
     }
@@ -854,6 +930,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    OwnerWallet: {
+      payload: Prisma.$OwnerWalletPayload<ExtArgs>
+      fields: Prisma.OwnerWalletFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.OwnerWalletFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OwnerWalletPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.OwnerWalletFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OwnerWalletPayload>
+        }
+        findFirst: {
+          args: Prisma.OwnerWalletFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OwnerWalletPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.OwnerWalletFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OwnerWalletPayload>
+        }
+        findMany: {
+          args: Prisma.OwnerWalletFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OwnerWalletPayload>[]
+        }
+        create: {
+          args: Prisma.OwnerWalletCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OwnerWalletPayload>
+        }
+        createMany: {
+          args: Prisma.OwnerWalletCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.OwnerWalletCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OwnerWalletPayload>[]
+        }
+        delete: {
+          args: Prisma.OwnerWalletDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OwnerWalletPayload>
+        }
+        update: {
+          args: Prisma.OwnerWalletUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OwnerWalletPayload>
+        }
+        deleteMany: {
+          args: Prisma.OwnerWalletDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.OwnerWalletUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.OwnerWalletUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OwnerWalletPayload>[]
+        }
+        upsert: {
+          args: Prisma.OwnerWalletUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OwnerWalletPayload>
+        }
+        aggregate: {
+          args: Prisma.OwnerWalletAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOwnerWallet>
+        }
+        groupBy: {
+          args: Prisma.OwnerWalletGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OwnerWalletGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.OwnerWalletCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OwnerWalletCountAggregateOutputType> | number
+        }
+      }
+    }
     Transaction: {
       payload: Prisma.$TransactionPayload<ExtArgs>
       fields: Prisma.TransactionFieldRefs
@@ -978,11 +1128,24 @@ export const UserScalarFieldEnum = {
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
+export const CarOwnerScalarFieldEnum = {
+  id: 'id',
+  fullName: 'fullName',
+  email: 'email',
+  phoneNumber: 'phoneNumber',
+  createdAt: 'createdAt'
+} as const
+
+export type CarOwnerScalarFieldEnum = (typeof CarOwnerScalarFieldEnum)[keyof typeof CarOwnerScalarFieldEnum]
+
+
 export const DriverScalarFieldEnum = {
   id: 'id',
   fullName: 'fullName',
   phoneNumber: 'phoneNumber',
   licenseIndex: 'licenseIndex',
+  companyName: 'companyName',
+  idCardUrl: 'idCardUrl',
   status: 'status',
   createdAt: 'createdAt'
 } as const
@@ -995,6 +1158,9 @@ export const VehicleScalarFieldEnum = {
   carType: 'carType',
   plateNumber: 'plateNumber',
   color: 'color',
+  basePrice: 'basePrice',
+  isAvailable: 'isAvailable',
+  ownerId: 'ownerId',
   driverId: 'driverId'
 } as const
 
@@ -1006,6 +1172,7 @@ export const RideScalarFieldEnum = {
   pickupLocation: 'pickupLocation',
   dropoffLocation: 'dropoffLocation',
   farePrice: 'farePrice',
+  negotiatedPrice: 'negotiatedPrice',
   status: 'status',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
@@ -1039,6 +1206,16 @@ export const WalletScalarFieldEnum = {
 export type WalletScalarFieldEnum = (typeof WalletScalarFieldEnum)[keyof typeof WalletScalarFieldEnum]
 
 
+export const OwnerWalletScalarFieldEnum = {
+  id: 'id',
+  balance: 'balance',
+  updatedAt: 'updatedAt',
+  ownerId: 'ownerId'
+} as const
+
+export type OwnerWalletScalarFieldEnum = (typeof OwnerWalletScalarFieldEnum)[keyof typeof OwnerWalletScalarFieldEnum]
+
+
 export const TransactionScalarFieldEnum = {
   id: 'id',
   amount: 'amount',
@@ -1047,6 +1224,7 @@ export const TransactionScalarFieldEnum = {
   description: 'description',
   createdAt: 'createdAt',
   walletId: 'walletId',
+  ownerWalletId: 'ownerWalletId',
   rideId: 'rideId'
 } as const
 
@@ -1136,6 +1314,13 @@ export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel,
  * Reference to a field of type 'Decimal[]'
  */
 export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Boolean'
+ */
+export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -1333,11 +1518,13 @@ export type PrismaClientOptions = ({
 }
 export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
+  carOwner?: Prisma.CarOwnerOmit
   driver?: Prisma.DriverOmit
   vehicle?: Prisma.VehicleOmit
   ride?: Prisma.RideOmit
   payment?: Prisma.PaymentOmit
   wallet?: Prisma.WalletOmit
+  ownerWallet?: Prisma.OwnerWalletOmit
   transaction?: Prisma.TransactionOmit
 }
 

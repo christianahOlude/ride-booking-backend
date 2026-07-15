@@ -20,8 +20,18 @@ export type VehicleModel = runtime.Types.Result.DefaultSelection<Prisma.$Vehicle
 
 export type AggregateVehicle = {
   _count: VehicleCountAggregateOutputType | null
+  _avg: VehicleAvgAggregateOutputType | null
+  _sum: VehicleSumAggregateOutputType | null
   _min: VehicleMinAggregateOutputType | null
   _max: VehicleMaxAggregateOutputType | null
+}
+
+export type VehicleAvgAggregateOutputType = {
+  basePrice: runtime.Decimal | null
+}
+
+export type VehicleSumAggregateOutputType = {
+  basePrice: runtime.Decimal | null
 }
 
 export type VehicleMinAggregateOutputType = {
@@ -29,6 +39,9 @@ export type VehicleMinAggregateOutputType = {
   carType: string | null
   plateNumber: string | null
   color: string | null
+  basePrice: runtime.Decimal | null
+  isAvailable: boolean | null
+  ownerId: string | null
   driverId: string | null
 }
 
@@ -37,6 +50,9 @@ export type VehicleMaxAggregateOutputType = {
   carType: string | null
   plateNumber: string | null
   color: string | null
+  basePrice: runtime.Decimal | null
+  isAvailable: boolean | null
+  ownerId: string | null
   driverId: string | null
 }
 
@@ -45,16 +61,30 @@ export type VehicleCountAggregateOutputType = {
   carType: number
   plateNumber: number
   color: number
+  basePrice: number
+  isAvailable: number
+  ownerId: number
   driverId: number
   _all: number
 }
 
+
+export type VehicleAvgAggregateInputType = {
+  basePrice?: true
+}
+
+export type VehicleSumAggregateInputType = {
+  basePrice?: true
+}
 
 export type VehicleMinAggregateInputType = {
   id?: true
   carType?: true
   plateNumber?: true
   color?: true
+  basePrice?: true
+  isAvailable?: true
+  ownerId?: true
   driverId?: true
 }
 
@@ -63,6 +93,9 @@ export type VehicleMaxAggregateInputType = {
   carType?: true
   plateNumber?: true
   color?: true
+  basePrice?: true
+  isAvailable?: true
+  ownerId?: true
   driverId?: true
 }
 
@@ -71,6 +104,9 @@ export type VehicleCountAggregateInputType = {
   carType?: true
   plateNumber?: true
   color?: true
+  basePrice?: true
+  isAvailable?: true
+  ownerId?: true
   driverId?: true
   _all?: true
 }
@@ -113,6 +149,18 @@ export type VehicleAggregateArgs<ExtArgs extends runtime.Types.Extensions.Intern
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: VehicleAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: VehicleSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: VehicleMinAggregateInputType
@@ -143,6 +191,8 @@ export type VehicleGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
   take?: number
   skip?: number
   _count?: VehicleCountAggregateInputType | true
+  _avg?: VehicleAvgAggregateInputType
+  _sum?: VehicleSumAggregateInputType
   _min?: VehicleMinAggregateInputType
   _max?: VehicleMaxAggregateInputType
 }
@@ -152,8 +202,13 @@ export type VehicleGroupByOutputType = {
   carType: string
   plateNumber: string
   color: string
+  basePrice: runtime.Decimal
+  isAvailable: boolean
+  ownerId: string
   driverId: string | null
   _count: VehicleCountAggregateOutputType | null
+  _avg: VehicleAvgAggregateOutputType | null
+  _sum: VehicleSumAggregateOutputType | null
   _min: VehicleMinAggregateOutputType | null
   _max: VehicleMaxAggregateOutputType | null
 }
@@ -181,7 +236,11 @@ export type VehicleWhereInput = {
   carType?: Prisma.StringFilter<"Vehicle"> | string
   plateNumber?: Prisma.StringFilter<"Vehicle"> | string
   color?: Prisma.StringFilter<"Vehicle"> | string
+  basePrice?: Prisma.DecimalFilter<"Vehicle"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isAvailable?: Prisma.BoolFilter<"Vehicle"> | boolean
+  ownerId?: Prisma.StringFilter<"Vehicle"> | string
   driverId?: Prisma.StringNullableFilter<"Vehicle"> | string | null
+  owner?: Prisma.XOR<Prisma.CarOwnerScalarRelationFilter, Prisma.CarOwnerWhereInput>
   driver?: Prisma.XOR<Prisma.DriverNullableScalarRelationFilter, Prisma.DriverWhereInput> | null
 }
 
@@ -190,7 +249,11 @@ export type VehicleOrderByWithRelationInput = {
   carType?: Prisma.SortOrder
   plateNumber?: Prisma.SortOrder
   color?: Prisma.SortOrder
+  basePrice?: Prisma.SortOrder
+  isAvailable?: Prisma.SortOrder
+  ownerId?: Prisma.SortOrder
   driverId?: Prisma.SortOrderInput | Prisma.SortOrder
+  owner?: Prisma.CarOwnerOrderByWithRelationInput
   driver?: Prisma.DriverOrderByWithRelationInput
 }
 
@@ -203,6 +266,10 @@ export type VehicleWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.VehicleWhereInput | Prisma.VehicleWhereInput[]
   carType?: Prisma.StringFilter<"Vehicle"> | string
   color?: Prisma.StringFilter<"Vehicle"> | string
+  basePrice?: Prisma.DecimalFilter<"Vehicle"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isAvailable?: Prisma.BoolFilter<"Vehicle"> | boolean
+  ownerId?: Prisma.StringFilter<"Vehicle"> | string
+  owner?: Prisma.XOR<Prisma.CarOwnerScalarRelationFilter, Prisma.CarOwnerWhereInput>
   driver?: Prisma.XOR<Prisma.DriverNullableScalarRelationFilter, Prisma.DriverWhereInput> | null
 }, "id" | "plateNumber" | "driverId">
 
@@ -211,10 +278,15 @@ export type VehicleOrderByWithAggregationInput = {
   carType?: Prisma.SortOrder
   plateNumber?: Prisma.SortOrder
   color?: Prisma.SortOrder
+  basePrice?: Prisma.SortOrder
+  isAvailable?: Prisma.SortOrder
+  ownerId?: Prisma.SortOrder
   driverId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.VehicleCountOrderByAggregateInput
+  _avg?: Prisma.VehicleAvgOrderByAggregateInput
   _max?: Prisma.VehicleMaxOrderByAggregateInput
   _min?: Prisma.VehicleMinOrderByAggregateInput
+  _sum?: Prisma.VehicleSumOrderByAggregateInput
 }
 
 export type VehicleScalarWhereWithAggregatesInput = {
@@ -225,6 +297,9 @@ export type VehicleScalarWhereWithAggregatesInput = {
   carType?: Prisma.StringWithAggregatesFilter<"Vehicle"> | string
   plateNumber?: Prisma.StringWithAggregatesFilter<"Vehicle"> | string
   color?: Prisma.StringWithAggregatesFilter<"Vehicle"> | string
+  basePrice?: Prisma.DecimalWithAggregatesFilter<"Vehicle"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isAvailable?: Prisma.BoolWithAggregatesFilter<"Vehicle"> | boolean
+  ownerId?: Prisma.StringWithAggregatesFilter<"Vehicle"> | string
   driverId?: Prisma.StringNullableWithAggregatesFilter<"Vehicle"> | string | null
 }
 
@@ -233,6 +308,9 @@ export type VehicleCreateInput = {
   carType: string
   plateNumber: string
   color: string
+  basePrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isAvailable?: boolean
+  owner: Prisma.CarOwnerCreateNestedOneWithoutVehiclesInput
   driver?: Prisma.DriverCreateNestedOneWithoutVehicleInput
 }
 
@@ -241,6 +319,9 @@ export type VehicleUncheckedCreateInput = {
   carType: string
   plateNumber: string
   color: string
+  basePrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isAvailable?: boolean
+  ownerId: string
   driverId?: string | null
 }
 
@@ -249,6 +330,9 @@ export type VehicleUpdateInput = {
   carType?: Prisma.StringFieldUpdateOperationsInput | string
   plateNumber?: Prisma.StringFieldUpdateOperationsInput | string
   color?: Prisma.StringFieldUpdateOperationsInput | string
+  basePrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  owner?: Prisma.CarOwnerUpdateOneRequiredWithoutVehiclesNestedInput
   driver?: Prisma.DriverUpdateOneWithoutVehicleNestedInput
 }
 
@@ -257,6 +341,9 @@ export type VehicleUncheckedUpdateInput = {
   carType?: Prisma.StringFieldUpdateOperationsInput | string
   plateNumber?: Prisma.StringFieldUpdateOperationsInput | string
   color?: Prisma.StringFieldUpdateOperationsInput | string
+  basePrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   driverId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
@@ -265,6 +352,9 @@ export type VehicleCreateManyInput = {
   carType: string
   plateNumber: string
   color: string
+  basePrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isAvailable?: boolean
+  ownerId: string
   driverId?: string | null
 }
 
@@ -273,6 +363,8 @@ export type VehicleUpdateManyMutationInput = {
   carType?: Prisma.StringFieldUpdateOperationsInput | string
   plateNumber?: Prisma.StringFieldUpdateOperationsInput | string
   color?: Prisma.StringFieldUpdateOperationsInput | string
+  basePrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type VehicleUncheckedUpdateManyInput = {
@@ -280,7 +372,20 @@ export type VehicleUncheckedUpdateManyInput = {
   carType?: Prisma.StringFieldUpdateOperationsInput | string
   plateNumber?: Prisma.StringFieldUpdateOperationsInput | string
   color?: Prisma.StringFieldUpdateOperationsInput | string
+  basePrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   driverId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type VehicleListRelationFilter = {
+  every?: Prisma.VehicleWhereInput
+  some?: Prisma.VehicleWhereInput
+  none?: Prisma.VehicleWhereInput
+}
+
+export type VehicleOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type VehicleNullableScalarRelationFilter = {
@@ -293,7 +398,14 @@ export type VehicleCountOrderByAggregateInput = {
   carType?: Prisma.SortOrder
   plateNumber?: Prisma.SortOrder
   color?: Prisma.SortOrder
+  basePrice?: Prisma.SortOrder
+  isAvailable?: Prisma.SortOrder
+  ownerId?: Prisma.SortOrder
   driverId?: Prisma.SortOrder
+}
+
+export type VehicleAvgOrderByAggregateInput = {
+  basePrice?: Prisma.SortOrder
 }
 
 export type VehicleMaxOrderByAggregateInput = {
@@ -301,6 +413,9 @@ export type VehicleMaxOrderByAggregateInput = {
   carType?: Prisma.SortOrder
   plateNumber?: Prisma.SortOrder
   color?: Prisma.SortOrder
+  basePrice?: Prisma.SortOrder
+  isAvailable?: Prisma.SortOrder
+  ownerId?: Prisma.SortOrder
   driverId?: Prisma.SortOrder
 }
 
@@ -309,7 +424,56 @@ export type VehicleMinOrderByAggregateInput = {
   carType?: Prisma.SortOrder
   plateNumber?: Prisma.SortOrder
   color?: Prisma.SortOrder
+  basePrice?: Prisma.SortOrder
+  isAvailable?: Prisma.SortOrder
+  ownerId?: Prisma.SortOrder
   driverId?: Prisma.SortOrder
+}
+
+export type VehicleSumOrderByAggregateInput = {
+  basePrice?: Prisma.SortOrder
+}
+
+export type VehicleCreateNestedManyWithoutOwnerInput = {
+  create?: Prisma.XOR<Prisma.VehicleCreateWithoutOwnerInput, Prisma.VehicleUncheckedCreateWithoutOwnerInput> | Prisma.VehicleCreateWithoutOwnerInput[] | Prisma.VehicleUncheckedCreateWithoutOwnerInput[]
+  connectOrCreate?: Prisma.VehicleCreateOrConnectWithoutOwnerInput | Prisma.VehicleCreateOrConnectWithoutOwnerInput[]
+  createMany?: Prisma.VehicleCreateManyOwnerInputEnvelope
+  connect?: Prisma.VehicleWhereUniqueInput | Prisma.VehicleWhereUniqueInput[]
+}
+
+export type VehicleUncheckedCreateNestedManyWithoutOwnerInput = {
+  create?: Prisma.XOR<Prisma.VehicleCreateWithoutOwnerInput, Prisma.VehicleUncheckedCreateWithoutOwnerInput> | Prisma.VehicleCreateWithoutOwnerInput[] | Prisma.VehicleUncheckedCreateWithoutOwnerInput[]
+  connectOrCreate?: Prisma.VehicleCreateOrConnectWithoutOwnerInput | Prisma.VehicleCreateOrConnectWithoutOwnerInput[]
+  createMany?: Prisma.VehicleCreateManyOwnerInputEnvelope
+  connect?: Prisma.VehicleWhereUniqueInput | Prisma.VehicleWhereUniqueInput[]
+}
+
+export type VehicleUpdateManyWithoutOwnerNestedInput = {
+  create?: Prisma.XOR<Prisma.VehicleCreateWithoutOwnerInput, Prisma.VehicleUncheckedCreateWithoutOwnerInput> | Prisma.VehicleCreateWithoutOwnerInput[] | Prisma.VehicleUncheckedCreateWithoutOwnerInput[]
+  connectOrCreate?: Prisma.VehicleCreateOrConnectWithoutOwnerInput | Prisma.VehicleCreateOrConnectWithoutOwnerInput[]
+  upsert?: Prisma.VehicleUpsertWithWhereUniqueWithoutOwnerInput | Prisma.VehicleUpsertWithWhereUniqueWithoutOwnerInput[]
+  createMany?: Prisma.VehicleCreateManyOwnerInputEnvelope
+  set?: Prisma.VehicleWhereUniqueInput | Prisma.VehicleWhereUniqueInput[]
+  disconnect?: Prisma.VehicleWhereUniqueInput | Prisma.VehicleWhereUniqueInput[]
+  delete?: Prisma.VehicleWhereUniqueInput | Prisma.VehicleWhereUniqueInput[]
+  connect?: Prisma.VehicleWhereUniqueInput | Prisma.VehicleWhereUniqueInput[]
+  update?: Prisma.VehicleUpdateWithWhereUniqueWithoutOwnerInput | Prisma.VehicleUpdateWithWhereUniqueWithoutOwnerInput[]
+  updateMany?: Prisma.VehicleUpdateManyWithWhereWithoutOwnerInput | Prisma.VehicleUpdateManyWithWhereWithoutOwnerInput[]
+  deleteMany?: Prisma.VehicleScalarWhereInput | Prisma.VehicleScalarWhereInput[]
+}
+
+export type VehicleUncheckedUpdateManyWithoutOwnerNestedInput = {
+  create?: Prisma.XOR<Prisma.VehicleCreateWithoutOwnerInput, Prisma.VehicleUncheckedCreateWithoutOwnerInput> | Prisma.VehicleCreateWithoutOwnerInput[] | Prisma.VehicleUncheckedCreateWithoutOwnerInput[]
+  connectOrCreate?: Prisma.VehicleCreateOrConnectWithoutOwnerInput | Prisma.VehicleCreateOrConnectWithoutOwnerInput[]
+  upsert?: Prisma.VehicleUpsertWithWhereUniqueWithoutOwnerInput | Prisma.VehicleUpsertWithWhereUniqueWithoutOwnerInput[]
+  createMany?: Prisma.VehicleCreateManyOwnerInputEnvelope
+  set?: Prisma.VehicleWhereUniqueInput | Prisma.VehicleWhereUniqueInput[]
+  disconnect?: Prisma.VehicleWhereUniqueInput | Prisma.VehicleWhereUniqueInput[]
+  delete?: Prisma.VehicleWhereUniqueInput | Prisma.VehicleWhereUniqueInput[]
+  connect?: Prisma.VehicleWhereUniqueInput | Prisma.VehicleWhereUniqueInput[]
+  update?: Prisma.VehicleUpdateWithWhereUniqueWithoutOwnerInput | Prisma.VehicleUpdateWithWhereUniqueWithoutOwnerInput[]
+  updateMany?: Prisma.VehicleUpdateManyWithWhereWithoutOwnerInput | Prisma.VehicleUpdateManyWithWhereWithoutOwnerInput[]
+  deleteMany?: Prisma.VehicleScalarWhereInput | Prisma.VehicleScalarWhereInput[]
 }
 
 export type VehicleCreateNestedOneWithoutDriverInput = {
@@ -344,8 +508,80 @@ export type VehicleUncheckedUpdateOneWithoutDriverNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.VehicleUpdateToOneWithWhereWithoutDriverInput, Prisma.VehicleUpdateWithoutDriverInput>, Prisma.VehicleUncheckedUpdateWithoutDriverInput>
 }
 
+export type DecimalFieldUpdateOperationsInput = {
+  set?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
+}
+
+export type BoolFieldUpdateOperationsInput = {
+  set?: boolean
+}
+
 export type NullableStringFieldUpdateOperationsInput = {
   set?: string | null
+}
+
+export type VehicleCreateWithoutOwnerInput = {
+  id?: string
+  carType: string
+  plateNumber: string
+  color: string
+  basePrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isAvailable?: boolean
+  driver?: Prisma.DriverCreateNestedOneWithoutVehicleInput
+}
+
+export type VehicleUncheckedCreateWithoutOwnerInput = {
+  id?: string
+  carType: string
+  plateNumber: string
+  color: string
+  basePrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isAvailable?: boolean
+  driverId?: string | null
+}
+
+export type VehicleCreateOrConnectWithoutOwnerInput = {
+  where: Prisma.VehicleWhereUniqueInput
+  create: Prisma.XOR<Prisma.VehicleCreateWithoutOwnerInput, Prisma.VehicleUncheckedCreateWithoutOwnerInput>
+}
+
+export type VehicleCreateManyOwnerInputEnvelope = {
+  data: Prisma.VehicleCreateManyOwnerInput | Prisma.VehicleCreateManyOwnerInput[]
+  skipDuplicates?: boolean
+}
+
+export type VehicleUpsertWithWhereUniqueWithoutOwnerInput = {
+  where: Prisma.VehicleWhereUniqueInput
+  update: Prisma.XOR<Prisma.VehicleUpdateWithoutOwnerInput, Prisma.VehicleUncheckedUpdateWithoutOwnerInput>
+  create: Prisma.XOR<Prisma.VehicleCreateWithoutOwnerInput, Prisma.VehicleUncheckedCreateWithoutOwnerInput>
+}
+
+export type VehicleUpdateWithWhereUniqueWithoutOwnerInput = {
+  where: Prisma.VehicleWhereUniqueInput
+  data: Prisma.XOR<Prisma.VehicleUpdateWithoutOwnerInput, Prisma.VehicleUncheckedUpdateWithoutOwnerInput>
+}
+
+export type VehicleUpdateManyWithWhereWithoutOwnerInput = {
+  where: Prisma.VehicleScalarWhereInput
+  data: Prisma.XOR<Prisma.VehicleUpdateManyMutationInput, Prisma.VehicleUncheckedUpdateManyWithoutOwnerInput>
+}
+
+export type VehicleScalarWhereInput = {
+  AND?: Prisma.VehicleScalarWhereInput | Prisma.VehicleScalarWhereInput[]
+  OR?: Prisma.VehicleScalarWhereInput[]
+  NOT?: Prisma.VehicleScalarWhereInput | Prisma.VehicleScalarWhereInput[]
+  id?: Prisma.StringFilter<"Vehicle"> | string
+  carType?: Prisma.StringFilter<"Vehicle"> | string
+  plateNumber?: Prisma.StringFilter<"Vehicle"> | string
+  color?: Prisma.StringFilter<"Vehicle"> | string
+  basePrice?: Prisma.DecimalFilter<"Vehicle"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isAvailable?: Prisma.BoolFilter<"Vehicle"> | boolean
+  ownerId?: Prisma.StringFilter<"Vehicle"> | string
+  driverId?: Prisma.StringNullableFilter<"Vehicle"> | string | null
 }
 
 export type VehicleCreateWithoutDriverInput = {
@@ -353,6 +589,9 @@ export type VehicleCreateWithoutDriverInput = {
   carType: string
   plateNumber: string
   color: string
+  basePrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isAvailable?: boolean
+  owner: Prisma.CarOwnerCreateNestedOneWithoutVehiclesInput
 }
 
 export type VehicleUncheckedCreateWithoutDriverInput = {
@@ -360,6 +599,9 @@ export type VehicleUncheckedCreateWithoutDriverInput = {
   carType: string
   plateNumber: string
   color: string
+  basePrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isAvailable?: boolean
+  ownerId: string
 }
 
 export type VehicleCreateOrConnectWithoutDriverInput = {
@@ -383,6 +625,9 @@ export type VehicleUpdateWithoutDriverInput = {
   carType?: Prisma.StringFieldUpdateOperationsInput | string
   plateNumber?: Prisma.StringFieldUpdateOperationsInput | string
   color?: Prisma.StringFieldUpdateOperationsInput | string
+  basePrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  owner?: Prisma.CarOwnerUpdateOneRequiredWithoutVehiclesNestedInput
 }
 
 export type VehicleUncheckedUpdateWithoutDriverInput = {
@@ -390,6 +635,49 @@ export type VehicleUncheckedUpdateWithoutDriverInput = {
   carType?: Prisma.StringFieldUpdateOperationsInput | string
   plateNumber?: Prisma.StringFieldUpdateOperationsInput | string
   color?: Prisma.StringFieldUpdateOperationsInput | string
+  basePrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ownerId?: Prisma.StringFieldUpdateOperationsInput | string
+}
+
+export type VehicleCreateManyOwnerInput = {
+  id?: string
+  carType: string
+  plateNumber: string
+  color: string
+  basePrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  isAvailable?: boolean
+  driverId?: string | null
+}
+
+export type VehicleUpdateWithoutOwnerInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  carType?: Prisma.StringFieldUpdateOperationsInput | string
+  plateNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  color?: Prisma.StringFieldUpdateOperationsInput | string
+  basePrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  driver?: Prisma.DriverUpdateOneWithoutVehicleNestedInput
+}
+
+export type VehicleUncheckedUpdateWithoutOwnerInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  carType?: Prisma.StringFieldUpdateOperationsInput | string
+  plateNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  color?: Prisma.StringFieldUpdateOperationsInput | string
+  basePrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  driverId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type VehicleUncheckedUpdateManyWithoutOwnerInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  carType?: Prisma.StringFieldUpdateOperationsInput | string
+  plateNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  color?: Prisma.StringFieldUpdateOperationsInput | string
+  basePrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  driverId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -399,7 +687,11 @@ export type VehicleSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   carType?: boolean
   plateNumber?: boolean
   color?: boolean
+  basePrice?: boolean
+  isAvailable?: boolean
+  ownerId?: boolean
   driverId?: boolean
+  owner?: boolean | Prisma.CarOwnerDefaultArgs<ExtArgs>
   driver?: boolean | Prisma.Vehicle$driverArgs<ExtArgs>
 }, ExtArgs["result"]["vehicle"]>
 
@@ -408,7 +700,11 @@ export type VehicleSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   carType?: boolean
   plateNumber?: boolean
   color?: boolean
+  basePrice?: boolean
+  isAvailable?: boolean
+  ownerId?: boolean
   driverId?: boolean
+  owner?: boolean | Prisma.CarOwnerDefaultArgs<ExtArgs>
   driver?: boolean | Prisma.Vehicle$driverArgs<ExtArgs>
 }, ExtArgs["result"]["vehicle"]>
 
@@ -417,7 +713,11 @@ export type VehicleSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   carType?: boolean
   plateNumber?: boolean
   color?: boolean
+  basePrice?: boolean
+  isAvailable?: boolean
+  ownerId?: boolean
   driverId?: boolean
+  owner?: boolean | Prisma.CarOwnerDefaultArgs<ExtArgs>
   driver?: boolean | Prisma.Vehicle$driverArgs<ExtArgs>
 }, ExtArgs["result"]["vehicle"]>
 
@@ -426,23 +726,30 @@ export type VehicleSelectScalar = {
   carType?: boolean
   plateNumber?: boolean
   color?: boolean
+  basePrice?: boolean
+  isAvailable?: boolean
+  ownerId?: boolean
   driverId?: boolean
 }
 
-export type VehicleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "carType" | "plateNumber" | "color" | "driverId", ExtArgs["result"]["vehicle"]>
+export type VehicleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "carType" | "plateNumber" | "color" | "basePrice" | "isAvailable" | "ownerId" | "driverId", ExtArgs["result"]["vehicle"]>
 export type VehicleInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  owner?: boolean | Prisma.CarOwnerDefaultArgs<ExtArgs>
   driver?: boolean | Prisma.Vehicle$driverArgs<ExtArgs>
 }
 export type VehicleIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  owner?: boolean | Prisma.CarOwnerDefaultArgs<ExtArgs>
   driver?: boolean | Prisma.Vehicle$driverArgs<ExtArgs>
 }
 export type VehicleIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  owner?: boolean | Prisma.CarOwnerDefaultArgs<ExtArgs>
   driver?: boolean | Prisma.Vehicle$driverArgs<ExtArgs>
 }
 
 export type $VehiclePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Vehicle"
   objects: {
+    owner: Prisma.$CarOwnerPayload<ExtArgs>
     driver: Prisma.$DriverPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -450,6 +757,9 @@ export type $VehiclePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     carType: string
     plateNumber: string
     color: string
+    basePrice: runtime.Decimal
+    isAvailable: boolean
+    ownerId: string
     driverId: string | null
   }, ExtArgs["result"]["vehicle"]>
   composites: {}
@@ -845,6 +1155,7 @@ readonly fields: VehicleFieldRefs;
  */
 export interface Prisma__VehicleClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  owner<T extends Prisma.CarOwnerDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CarOwnerDefaultArgs<ExtArgs>>): Prisma.Prisma__CarOwnerClient<runtime.Types.Result.GetResult<Prisma.$CarOwnerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   driver<T extends Prisma.Vehicle$driverArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Vehicle$driverArgs<ExtArgs>>): Prisma.Prisma__DriverClient<runtime.Types.Result.GetResult<Prisma.$DriverPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -879,6 +1190,9 @@ export interface VehicleFieldRefs {
   readonly carType: Prisma.FieldRef<"Vehicle", 'String'>
   readonly plateNumber: Prisma.FieldRef<"Vehicle", 'String'>
   readonly color: Prisma.FieldRef<"Vehicle", 'String'>
+  readonly basePrice: Prisma.FieldRef<"Vehicle", 'Decimal'>
+  readonly isAvailable: Prisma.FieldRef<"Vehicle", 'Boolean'>
+  readonly ownerId: Prisma.FieldRef<"Vehicle", 'String'>
   readonly driverId: Prisma.FieldRef<"Vehicle", 'String'>
 }
     

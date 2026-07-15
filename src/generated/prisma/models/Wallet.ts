@@ -341,11 +341,6 @@ export type WalletSumOrderByAggregateInput = {
   balance?: Prisma.SortOrder
 }
 
-export type WalletScalarRelationFilter = {
-  is?: Prisma.WalletWhereInput
-  isNot?: Prisma.WalletWhereInput
-}
-
 export type WalletCreateNestedOneWithoutDriverInput = {
   create?: Prisma.XOR<Prisma.WalletCreateWithoutDriverInput, Prisma.WalletUncheckedCreateWithoutDriverInput>
   connectOrCreate?: Prisma.WalletCreateOrConnectWithoutDriverInput
@@ -384,10 +379,12 @@ export type WalletCreateNestedOneWithoutTransactionsInput = {
   connect?: Prisma.WalletWhereUniqueInput
 }
 
-export type WalletUpdateOneRequiredWithoutTransactionsNestedInput = {
+export type WalletUpdateOneWithoutTransactionsNestedInput = {
   create?: Prisma.XOR<Prisma.WalletCreateWithoutTransactionsInput, Prisma.WalletUncheckedCreateWithoutTransactionsInput>
   connectOrCreate?: Prisma.WalletCreateOrConnectWithoutTransactionsInput
   upsert?: Prisma.WalletUpsertWithoutTransactionsInput
+  disconnect?: Prisma.WalletWhereInput | boolean
+  delete?: Prisma.WalletWhereInput | boolean
   connect?: Prisma.WalletWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.WalletUpdateToOneWithWhereWithoutTransactionsInput, Prisma.WalletUpdateWithoutTransactionsInput>, Prisma.WalletUncheckedUpdateWithoutTransactionsInput>
 }

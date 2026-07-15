@@ -9,6 +9,24 @@
 * 🟢 You can import this file directly.
 */
 
+export const PaymentMethod = {
+  TRANSFER: 'TRANSFER',
+  CARD: 'CARD',
+  WALLET: 'WALLET'
+} as const
+
+export type PaymentMethod = (typeof PaymentMethod)[keyof typeof PaymentMethod]
+
+
+export const TxPurpose = {
+  TRIP_EARNINGS: 'TRIP_EARNINGS',
+  COMMISSION_EARNED: 'COMMISSION_EARNED',
+  WITHDRAWAL: 'WITHDRAWAL'
+} as const
+
+export type TxPurpose = (typeof TxPurpose)[keyof typeof TxPurpose]
+
+
 export const DriverStatus = {
   AVAILABLE: 'AVAILABLE',
   BUSY: 'BUSY',
@@ -29,15 +47,6 @@ export const RideStatus = {
 export type RideStatus = (typeof RideStatus)[keyof typeof RideStatus]
 
 
-export const PaymentMethod = {
-  CASH: 'CASH',
-  WALLET: 'WALLET',
-  CARD: 'CARD'
-} as const
-
-export type PaymentMethod = (typeof PaymentMethod)[keyof typeof PaymentMethod]
-
-
 export const PaymentStatus = {
   PENDING: 'PENDING',
   SUCCESSFUL: 'SUCCESSFUL',
@@ -53,13 +62,3 @@ export const TransactionType = {
 } as const
 
 export type TransactionType = (typeof TransactionType)[keyof typeof TransactionType]
-
-
-export const TxPurpose = {
-  TRIP_EARNINGS: 'TRIP_EARNINGS',
-  COMMISSION_DEDUCTION: 'COMMISSION_DEDUCTION',
-  WITHDRAWAL: 'WITHDRAWAL',
-  CASH_COLLECTED: 'CASH_COLLECTED'
-} as const
-
-export type TxPurpose = (typeof TxPurpose)[keyof typeof TxPurpose]
