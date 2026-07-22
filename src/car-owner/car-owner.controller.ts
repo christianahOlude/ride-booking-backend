@@ -1,34 +1,35 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Post, Body, Param, Patch, Get, ParseUUIDPipe } from '@nestjs/common';
 import { CarOwnerService } from './car-owner.service';
 import { CreateCarOwnerDto } from './dto/create-car-owner.dto';
-import { UpdateCarOwnerDto } from './dto/update-car-owner.dto';
+import { CreateVehicleDto } from '../vehicle/dto/create-vehicle.dto';
 
 @Controller('car-owner')
 export class CarOwnerController {
-  constructor(private readonly carOwnerService: CarOwnerService) {}
+  constructor(private readonly carOwnerService: CarOwnerService) { }
 
-  @Post()
-  create(@Body() createCarOwnerDto: CreateCarOwnerDto) {
+  @Post('register')
+  register(@Body() createCarOwnerDto: CreateCarOwnerDto) {
     return this.carOwnerService.create(createCarOwnerDto);
   }
 
-  @Get()
-  findAll() {
-    return this.carOwnerService.findAll();
+  @Post(':id/vehicles')
+  addVehicle(
+    @Param('id', ParseUUIDPipe) ownerId: string,
+    @Body() addVehicleDto: CreateVehicleDto,
+  ) {
+    return this.carOwnerService.addVehicle(ownerId, addVehicleDto);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.carOwnerService.findOne(+id);
+  @Patch('vehicles/:vehicleId/availability')
+  toggleAvailability(
+    @Param('vehicleId', ParseUUIDPipe) vehicleId: string,
+    @Body('isAvailable') isAvailable: boolean,
+  ) {
+    return this.carOwnerService.toggleAvailability(vehicleId, isAvailable);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCarOwnerDto: UpdateCarOwnerDto) {
-    return this.carOwnerService.update(+id, updateCarOwnerDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.carOwnerService.remove(+id);
+  @Get(':id/dashboard')
+  getDashboard(@Param('id', ParseUUIDPipe) ownerId: string) {
+    return this.carOwnerService.getDashboard(ownerId);
   }
 }

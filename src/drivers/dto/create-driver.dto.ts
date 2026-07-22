@@ -1,10 +1,23 @@
+import { IsEmail, IsNotEmpty, IsString, IsPhoneNumber, IsUrl } from 'class-validator';
+
 export class CreateDriverDto {
+    @IsString()
+    @IsNotEmpty()
     fullName: string;
+
+    @IsEmail()
+    @IsNotEmpty()
+    email: string;
+
+    @IsPhoneNumber()
+    @IsNotEmpty()
     phoneNumber: string;
-    licenseIndex: string;
-    vehicle?: {
-        carType: string;
-        plateNumber: string;
-        color: string;
-    };
+
+    @IsString()
+    @IsNotEmpty()
+    companyName: string;
+
+    @IsUrl()
+    @IsNotEmpty()
+    idCardUrl: string;
 }
